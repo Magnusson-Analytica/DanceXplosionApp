@@ -107,7 +107,7 @@ function CookieConsent() {
                             <div className="cookie-toggle-row">
                                 <div className="toggle-info">
                                     <span className="toggle-label">Strict Necesare</span>
-                                    <span className="toggle-desc">Esențiale pentru funcționarea site-ului. Nu pot fi dezactivate.</span>
+                                    <span className="toggle-desc">Esențiale pentru funcționarea site-ului</span>
                                 </div>
                                 <div className="toggle-switch disabled">
                                     <input type="checkbox" checked readOnly />
@@ -135,7 +135,7 @@ function CookieConsent() {
                             <div className="cookie-toggle-row">
                                 <div className="toggle-info">
                                     <span className="toggle-label">Analiză și Trafic</span>
-                                    <span className="toggle-desc">Colectăm date anonime (Amplitude) pentru a îmbunătăți site-ul.</span>
+                                    <span className="toggle-desc">Colectăm date anonime pentru a îmbunătăți site-ul.</span>
                                 </div>
                                 <label className="toggle-switch">
                                     <input 

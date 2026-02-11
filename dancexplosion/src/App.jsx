@@ -8,9 +8,8 @@ import Footer from './components/layout/Footer';
 import KizombaPage from './pages/Kizomba/kizombaPage.jsx'; 
 import WeddingDancePage from './pages/WeddingDance/WeddingDancePage.jsx';
 import KidsPage from './pages/Kids/KidsPage.jsx';
-
-// --- NEW IMPORT ---
 import MixedPage from './pages/Mixed/MixedPage.jsx';
+import PrivateClassPage from './pages/PrivateClasses/PrivateClassPage.jsx';
 
 import AlexLazar from "./pages/Instructor/Alex_Lazar/alexlazar.jsx"; 
 import NicoletaCristiana from "./pages/Instructor/Nicoleta_Cristina/nicoletacristina.jsx";
@@ -81,7 +80,6 @@ function App() {
   let PageComponent;
   let isHome = false;
 
-  // ROUTING LOGIC
   if (currentHash === 'salsa') {
     PageComponent = SalsaPage;
   } else if (currentHash === 'bachata') {
@@ -93,8 +91,9 @@ function App() {
   } else if (currentHash === 'copii') {
     PageComponent = KidsPage;
   } else if (currentHash === 'mixed') {
-    // --- NEW ROUTE ---
     PageComponent = MixedPage;
+  } else if (currentHash === 'cursuri-private') {
+    PageComponent = PrivateClassPage;
   } else if (currentHash.startsWith('instructor/')) {
     const slug = currentHash.split('/')[1];
     

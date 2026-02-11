@@ -21,7 +21,6 @@ function Navbar({ openLogin, isHome }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHome]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -44,7 +43,6 @@ function Navbar({ openLogin, isHome }) {
     <header className={headerClass}>
       <div className="nav-content">
         
-        {/* LEFT: Logo & Brand Name */}
         <a href="#top" className="navbar-brand">
           <img src={DXPLogo} alt="DXP Logo" className="brand-logo" />
           <span className="brand-text">DANCE XPLOSION ACADEMY</span>
@@ -56,7 +54,6 @@ function Navbar({ openLogin, isHome }) {
           <div className="dropdown-container">
             <a href="#clase" className="nav-link dropdown-trigger">
               CURSURI 
-              {/* Rounded SVG Arrow */}
               <span className="arrow-icon">
                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -69,10 +66,11 @@ function Navbar({ openLogin, isHome }) {
               <a href="#kizomba">Kizomba</a>
               <div className="dropdown-divider"></div>
               <a href="#mixed" className="mixt-link">Curs Mixt</a>
+              {/* MOVED: Cursuri Private is now here inside the dropdown */}
+              <a href="#cursuri-private" style={{ color: '#D4AF37', fontWeight: 'bold' }}>Cursuri Private</a>
             </div>
           </div>
 
-          {/* NEW OPTION */}
           <a href="#copii" className="nav-link">
             PENTRU COPII
           </a>
@@ -80,6 +78,8 @@ function Navbar({ openLogin, isHome }) {
           <a href="#dansul-mirilor" className="nav-link wedding-link">
             DANSUL MIRILOR
           </a>
+
+          {/* REMOVED: Cursuri Private link from main bar */}
 
           <a href="#lxf" className="nav-link">LXF</a>
         </nav>
@@ -107,7 +107,6 @@ function Navbar({ openLogin, isHome }) {
       {/* MOBILE MENU OVERLAY */}
       <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
           
-          {/* Top Section: Auth Buttons aligned right */}
           <div className="mobile-auth-section">
             <button className="nav-link text-btn mobile-login" onClick={() => { openLogin(); closeMobileMenu(); }}>
                 AUTENTIFICARE
@@ -117,7 +116,6 @@ function Navbar({ openLogin, isHome }) {
             </button>
           </div>
 
-          {/* Bottom Section: Navigation Links */}
           <nav className="mobile-nav-links">
             
             <span className="mobile-category">CURSURI</span>
@@ -126,14 +124,15 @@ function Navbar({ openLogin, isHome }) {
             <a href="#kizomba" onClick={closeMobileMenu} className="sub-link">Kizomba</a>
             <a href="#mixed" onClick={closeMobileMenu} className="sub-link highlight">Curs Mixt</a>
             
-            {/* NEW MOBILE LINK */}
+            {/* Mobile Link remains here as requested previously */}
+            <a href="#cursuri-private" onClick={closeMobileMenu} className="sub-link" style={{ color: '#D4AF37' }}>Cursuri Private</a>
+            
             <div className="mobile-divider"></div>
             <a href="#copii" onClick={closeMobileMenu} className="special-link">PENTRU COPII</a>
 
             <div className="mobile-divider"></div>
             <a href="#dansul-mirilor" onClick={closeMobileMenu} className="special-link">DANSUL MIRILOR</a>
 
-            {/* Added Divider Here */}
             <div className="mobile-divider"></div>
             <a href="#lxf" onClick={closeMobileMenu}>LXF</a>
           </nav>
