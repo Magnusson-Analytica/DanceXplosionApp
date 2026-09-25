@@ -61,25 +61,26 @@ h1, h2, h3 {
     top: 50%;
     left: 50%;
     width: 0;
-    height: 0;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
+    transition: width 0.6s;
     z-index: -1;
 }
 
+/* Size the ripple from the button's own width so it covers buttons of any length */
 .cta-primary-dark:hover::before,
 .cta-secondary-accent:hover::before {
-    width: 300px;
-    height: 300px;
+    width: 120%;
 }
 
+/* Primary action is filled so it outranks the outlined secondary button */
 .cta-primary-dark {
-    background: transparent; 
+    background: var(--c-secondary); 
     color: var(--c-white); 
-    border-color: var(--c-white);
-    box-shadow: none;
+    border-color: var(--c-secondary);
+    box-shadow: 0 8px 25px rgba(255, 112, 51, 0.35);
 }
 
 .cta-primary-dark:hover {
@@ -169,21 +170,12 @@ h1, h2, h3 {
     color: var(--c-white);
 }
 
-.hero-title .title-word:first-child {
-    background: linear-gradient(135deg, var(--c-white) 0%, var(--c-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-block;
-    animation: gradientShift 4s ease-in-out infinite;
-}
-
 .hero-title .accent-color-text {
     color: var(--c-accent);
     display: inline-block;
     position: relative;
     text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-    animation: shimmer 3s ease-in-out infinite;
+    animation: slideInSpectacular 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards, shimmer 3s ease-in-out infinite;
 }
 
 .title-word {
@@ -198,7 +190,7 @@ h1, h2, h3 {
 .title-word.delay-3 { animation-delay: 0.7s; }
 
 .hero-pitch {
-    font-size: 4rem;
+    font-size: 1.6rem;
     font-weight: 800;
     margin: 5px auto 50px;
     max-width: 1000px;
@@ -557,5 +549,15 @@ h1, h2, h3 {
     100% {
         transform: scale(1);
         opacity: 1;
+    }
+}
+/* Show the headline straight away, without movement, for visitors who ask for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .title-word,
+    .hero-title .accent-color-text,
+    .hero-pitch {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
     }
 }

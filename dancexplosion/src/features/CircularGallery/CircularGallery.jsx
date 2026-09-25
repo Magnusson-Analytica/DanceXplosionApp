@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import './CircularGallery.css';
+import { navigate } from '../../router';
 
 // Using the correct relative paths to your uploaded images
 import nicoletaPhoto from '../../assets/images/nicoleta_cristina.png';
@@ -134,7 +135,7 @@ const InfiniteMovingTeamCarousel = ({ items = teamMembersData, initialSpeed = '3
     // Updated click handler to support all instructors
     const handleCardClick = (item) => {
         if (item.slug) {
-            window.location.hash = `#instructor/${item.slug}`;
+            navigate(`/instructori/${item.slug}`);
         }
     };
 
@@ -156,16 +157,21 @@ const InfiniteMovingTeamCarousel = ({ items = teamMembersData, initialSpeed = '3
                         item.slug === 'alexandra-ivan' ? 'photo-align-top' :
                         item.slug === 'adrian-rasinariu' ? 'photo-align-upper' : '';
 
+                    // The second copy only exists for the seamless loop, so hide it from screen readers
+                    const isDuplicate = index >= items.length;
+
                     return (
                         <div 
                             key={`${item.id}-${index}`} 
                             className="team-card-infinite"
                             onClick={() => handleCardClick(item)}
+                            aria-hidden={isDuplicate || undefined}
                         >
                             <div className="card-photo-wrapper">
                                 <img 
                                     src={item.image} 
-                                    alt={item.name} 
+                                    alt={`${item.name}, instructor Dance Xplosion Academy`} 
+                                    loading="lazy"
                                     className={`member-photo-infinite ${photoClass}`}
                                 />
                             </div>

@@ -23,7 +23,7 @@ function AdrianRasinariu({ openInscriere }) {
             { label: "Experiență Predare", value: "16 Ani" },
             { label: "Specializare", value: "Salsa, Bachata, Dans Sportiv" },
         ],
-        classes: ["Copii 7-14 Ani", "Bachata Intermediari"],
+        classes: ["Copii 7-15 Ani", "Bachata Intermediari"],
         photo: instructorPhoto,
     };
 
@@ -92,7 +92,7 @@ function AdrianRasinariu({ openInscriere }) {
                     <button className="cta-contact-instructor" onClick={openInscriere}>
                         Înscrie-te la Cursurile lui Adrian
                     </button>
-                    <a href="#" className="back-link">← Înapoi la Pagină Principală</a>
+                    <a href="/" className="back-link">← Înapoi la Pagină Principală</a>
                 </div>
             </div>
         </div>

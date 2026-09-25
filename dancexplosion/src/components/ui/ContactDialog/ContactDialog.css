@@ -1,0 +1,81 @@
+.contact-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.contact-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    padding: 36px 30px 28px;
+    background: var(--c-white);
+    border-radius: 18px;
+    border-top: 5px solid var(--c-secondary);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    font-family: 'Georgia', serif;
+}
+
+.contact-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: none;
+    font-size: 1.8rem;
+    color: var(--c-text-primary);
+    cursor: pointer;
+}
+
+.contact-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.contact-subtitle {
+    color: var(--c-text-primary);
+    line-height: 1.5;
+    margin-bottom: 6px;
+}
+
+.contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.contact-option {
+    display: block;
+    min-height: 48px;
+    padding: 13px 20px;
+    border: 2px solid var(--c-secondary);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--c-secondary);
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.contact-option:hover,
+.contact-option.primary {
+    background: var(--c-secondary);
+    color: var(--c-white);
+}
+
+.contact-option.primary:hover {
+    background: #e85f24;
+    border-color: #e85f24;
+}

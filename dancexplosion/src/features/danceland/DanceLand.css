@@ -1,0 +1,195 @@
+.danceland-section {
+    padding: 90px 5%;
+    background: linear-gradient(135deg, #1A1A1A 0%, #2b2118 100%);
+    color: var(--c-white);
+    text-align: center;
+    font-family: 'Georgia', serif;
+}
+
+.danceland-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.danceland-eyebrow {
+    font-size: 0.85rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    color: var(--c-accent);
+    margin-bottom: 14px;
+}
+
+.danceland-title {
+    font-size: 2.8rem;
+    color: var(--c-white);
+    margin-bottom: 12px;
+}
+
+.danceland-dates {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--c-secondary);
+    margin-bottom: 20px;
+}
+
+.danceland-intro {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.danceland-sessions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.danceland-session {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 14px;
+    padding: 22px 18px;
+}
+
+.danceland-session h3 {
+    color: var(--c-accent);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.danceland-session ul {
+    list-style: none;
+    margin: 0;
+    line-height: 1.8;
+    color: var(--c-white);
+}
+
+.danceland-seminar {
+    max-width: 720px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.danceland-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin: 10px 0 40px;
+    text-align: left;
+}
+
+.danceland-detail-block {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 26px 24px;
+}
+
+.danceland-detail-block h3 {
+    color: var(--c-accent);
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+}
+
+.danceland-detail-block ul,
+.danceland-detail-block ol {
+    padding-left: 20px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.danceland-detail-block li {
+    margin-bottom: 10px;
+}
+
+.danceland-sponsor {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--c-accent);
+}
+
+.danceland-note {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 16px;
+}
+
+.danceland-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px 28px;
+    margin-bottom: 26px;
+}
+
+.danceland-cta {
+    padding: 16px 38px;
+    border: none;
+    border-radius: 50px;
+    background: var(--c-secondary);
+    color: var(--c-white);
+    font-family: 'Georgia', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.danceland-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 112, 51, 0.45);
+}
+
+.danceland-link {
+    display: inline-block;
+    padding: 10px 0;
+    color: var(--c-accent);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.danceland-link-button {
+    border: none;
+    background: none;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.danceland-link:hover {
+    text-decoration: underline;
+}
+
+.danceland-location,
+.danceland-contact {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.danceland-contact a {
+    display: inline-block;
+    padding: 8px 0;
+    color: var(--c-white);
+}
+
+@media (max-width: 600px) {
+    .danceland-section {
+        padding: 70px 5%;
+    }
+
+    .danceland-title {
+        font-size: 2rem;
+    }
+
+    .danceland-cta {
+        width: 100%;
+    }
+}

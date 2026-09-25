@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import DXPLogo from '../../assets/icons/DXPlogo.png';
 
-function Navbar({ openLogin, isHome }) {
+function Navbar({ isHome }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -43,8 +43,8 @@ function Navbar({ openLogin, isHome }) {
     <header className={headerClass}>
       <div className="nav-content">
         
-        <a href="#top" className="navbar-brand">
-          <img src={DXPLogo} alt="DXP Logo" className="brand-logo" />
+        <a href="/" className="navbar-brand">
+          <img src={DXPLogo} alt="Dance Xplosion Academy logo" className="brand-logo" />
           <span className="brand-text">DANCE XPLOSION ACADEMY</span>
         </a>
 
@@ -52,7 +52,7 @@ function Navbar({ openLogin, isHome }) {
         <nav className="nav-links-center desktop-only">
           
           <div className="dropdown-container">
-            <a href="#clase" className="nav-link dropdown-trigger">
+            <a href="/#clase" className="nav-link dropdown-trigger">
               CURSURI 
               <span className="arrow-icon">
                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,42 +61,45 @@ function Navbar({ openLogin, isHome }) {
               </span>
             </a>
             <div className="dropdown-menu">
-              <a href="#salsa">Salsa</a>
-              <a href="#bachata">Bachata</a>
-              <a href="#kizomba">Kizomba</a>
+              <a href="/salsa">Salsa</a>
+              <a href="/bachata">Bachata</a>
+              <a href="/kizomba">Kizomba</a>
               <div className="dropdown-divider"></div>
-              <a href="#mixed" className="mixt-link">Curs Mixt</a>
+              <a href="/curs-mixt" className="mixt-link">Curs Mixt</a>
               {/* MOVED: Cursuri Private is now here inside the dropdown */}
-              <a href="#cursuri-private" style={{ color: '#D4AF37', fontWeight: 'bold' }}>Cursuri Private</a>
+              <a href="/cursuri-private" style={{ color: '#D4AF37', fontWeight: 'bold' }}>Cursuri Private</a>
             </div>
           </div>
 
-          <a href="#copii" className="nav-link">
+          <a href="/copii" className="nav-link">
             PENTRU COPII
           </a>
 
-          <a href="#dansul-mirilor" className="nav-link wedding-link">
+          <a href="/dansul-mirilor" className="nav-link wedding-link">
             DANSUL MIRILOR
           </a>
 
           {/* REMOVED: Cursuri Private link from main bar */}
 
-          <a href="#lxf" className="nav-link">LXF</a>
+          <a href="/#preturi" className="nav-link">PREȚURI</a>
+
+          <a href="/#lxf" className="nav-link">LXF</a>
         </nav>
 
-        {/* RIGHT: Desktop Auth Buttons */}
+        {/* RIGHT: Sign-up for the new beginner groups (Autentificare/Înregistrare hidden until accounts exist) */}
         <div className="navbar-actions desktop-only">
-           <button className="nav-link text-btn login-btn" onClick={openLogin}>
-            AUTENTIFICARE
-          </button>
-
-          <button className="cta-nav" onClick={openLogin}> 
-            ÎNREGISTRARE 
-          </button>  
+          <a href="/#grupe-noi" className="cta-nav">
+            ÎNSCRIE-TE
+          </a>
         </div>
 
         {/* MOBILE HAMBURGER BUTTON */}
-        <button className={`hamburger-btn ${isMobileMenuOpen ? 'active' : ''}`} onClick={toggleMobileMenu}>
+        <button
+            className={`hamburger-btn ${isMobileMenuOpen ? 'active' : ''}`}
+            onClick={toggleMobileMenu}
+            aria-label={isMobileMenuOpen ? 'Închide meniul' : 'Deschide meniul'}
+            aria-expanded={isMobileMenuOpen}
+        >
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
@@ -108,33 +111,36 @@ function Navbar({ openLogin, isHome }) {
       <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
           
           <div className="mobile-auth-section">
-            <button className="nav-link text-btn mobile-login" onClick={() => { openLogin(); closeMobileMenu(); }}>
-                AUTENTIFICARE
-            </button>
-            <button className="cta-nav mobile-signup" onClick={() => { openLogin(); closeMobileMenu(); }}>
-                ÎNREGISTRARE
-            </button>
+            <a href="/#grupe-noi" className="cta-nav mobile-signup" onClick={closeMobileMenu}>
+                ÎNSCRIE-TE LA GRUPELE NOI
+            </a>
+            <a href="tel:+40751327415" className="nav-link mobile-login">
+                SUNĂ: 0751 327 415
+            </a>
           </div>
 
           <nav className="mobile-nav-links">
             
             <span className="mobile-category">CURSURI</span>
-            <a href="#salsa" onClick={closeMobileMenu} className="sub-link">Salsa</a>
-            <a href="#bachata" onClick={closeMobileMenu} className="sub-link">Bachata</a>
-            <a href="#kizomba" onClick={closeMobileMenu} className="sub-link">Kizomba</a>
-            <a href="#mixed" onClick={closeMobileMenu} className="sub-link highlight">Curs Mixt</a>
+            <a href="/salsa" onClick={closeMobileMenu} className="sub-link">Salsa</a>
+            <a href="/bachata" onClick={closeMobileMenu} className="sub-link">Bachata</a>
+            <a href="/kizomba" onClick={closeMobileMenu} className="sub-link">Kizomba</a>
+            <a href="/curs-mixt" onClick={closeMobileMenu} className="sub-link highlight">Curs Mixt</a>
             
             {/* Mobile Link remains here as requested previously */}
-            <a href="#cursuri-private" onClick={closeMobileMenu} className="sub-link" style={{ color: '#D4AF37' }}>Cursuri Private</a>
+            <a href="/cursuri-private" onClick={closeMobileMenu} className="sub-link" style={{ color: '#D4AF37' }}>Cursuri Private</a>
             
             <div className="mobile-divider"></div>
-            <a href="#copii" onClick={closeMobileMenu} className="special-link">PENTRU COPII</a>
+            <a href="/copii" onClick={closeMobileMenu} className="special-link">PENTRU COPII</a>
 
             <div className="mobile-divider"></div>
-            <a href="#dansul-mirilor" onClick={closeMobileMenu} className="special-link">DANSUL MIRILOR</a>
+            <a href="/dansul-mirilor" onClick={closeMobileMenu} className="special-link">DANSUL MIRILOR</a>
 
             <div className="mobile-divider"></div>
-            <a href="#lxf" onClick={closeMobileMenu}>LXF</a>
+            <a href="/#preturi" onClick={closeMobileMenu} className="special-link">PREȚURI ȘI ÎNTREBĂRI</a>
+
+            <div className="mobile-divider"></div>
+            <a href="/#lxf" onClick={closeMobileMenu}>LXF</a>
           </nav>
       </div>
     </header>

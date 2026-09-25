@@ -35,7 +35,7 @@ function Footer() {
                             rel="noopener noreferrer" 
                             className="footer-link address-link"
                         >
-                            Bulevardul Victoriei nr. 42,<br />
+                            Bulevardul Victoriei nr. 42, et. 3,<br />
                             Sibiu, România
                         </a>
                     </div>
@@ -45,9 +45,8 @@ function Footer() {
                 <div className="footer-section social-section">
                     <h3 className="footer-heading">Urmărește-ne</h3>
                     <div className="social-links">
-                        <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
-                        <a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
-                        <a href="https://tiktok.com" target="_blank" rel="noreferrer">TikTok</a>
+                        <a href="https://www.instagram.com/dancexplosionacademy/" target="_blank" rel="noreferrer">Instagram</a>
+                        <a href="https://www.facebook.com/DanceXplosionAcademy/" target="_blank" rel="noreferrer">Facebook</a>
                     </div>
                 </div>
             </div>

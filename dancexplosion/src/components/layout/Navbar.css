@@ -25,6 +25,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 32px;
     padding: 0 40px;
 }
 
@@ -85,6 +86,7 @@
     position: relative;
     display: inline-flex;
     align-items: center;
+    white-space: nowrap;
 }
 
 .nav-link::after {
@@ -122,7 +124,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    flex: 1; 
+    flex: 0 0 auto; /* Never let the booking button get squeezed off screen */
     gap: 25px; 
 }
 
@@ -131,6 +133,8 @@
 }
 
 .cta-nav {
+    display: inline-block;
+    text-decoration: none;
     padding: 12px 28px;
     border-radius: 50px;
     background: var(--c-secondary);
@@ -371,13 +375,13 @@
     margin: 10px 0;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1400px) {
     .brand-text { font-size: 1rem; }
     .nav-links-center { gap: 20px; }
     .navbar-actions { gap: 15px; }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     .nav-content { padding: 0 20px; }
     .brand-text { display: none; }
 }

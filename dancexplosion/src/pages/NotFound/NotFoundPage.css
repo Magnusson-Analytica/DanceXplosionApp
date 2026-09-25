@@ -1,0 +1,52 @@
+.not-found-section {
+    min-height: 70vh;
+    padding: 160px 5% 100px;
+    text-align: center;
+    background: var(--c-background);
+    font-family: 'Georgia', serif;
+}
+
+.not-found-code {
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--c-secondary);
+    line-height: 1;
+    margin-bottom: 16px;
+}
+
+.not-found-title {
+    font-size: 2.4rem;
+    margin-bottom: 14px;
+}
+
+.not-found-text {
+    color: var(--c-text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 36px;
+}
+
+.not-found-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px 28px;
+}
+
+.not-found-cta {
+    display: inline-block;
+    padding: 16px 36px;
+    border-radius: 50px;
+    background: var(--c-secondary);
+    color: var(--c-white);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.not-found-link {
+    display: inline-block;
+    padding: 10px 0;
+    color: var(--c-secondary);
+    font-weight: 700;
+    text-decoration: none;
+}

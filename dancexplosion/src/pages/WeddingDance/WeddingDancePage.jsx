@@ -17,6 +17,8 @@ const packages = [
     },
 ];
 
+const WEDDING_MESSAGE = "Bună ziua! Aș dori o ofertă pentru dansul mirilor.";
+
 function WeddingDancePage({ openInscriere }) {
     return (
         <div className="wedding-page-container">
@@ -30,8 +32,8 @@ function WeddingDancePage({ openInscriere }) {
                         Scăpați de emoții și bucurați-vă de cel mai frumos moment al serii. 
                         Oferim lecții private, coregrafii personalizate și o atmosferă relaxată.
                     </p>
-                    <button onClick={openInscriere} className="cta-page-main-wedding">
-                        Programează o ședință pe WhatsApp
+                    <button onClick={() => openInscriere(WEDDING_MESSAGE)} className="cta-page-main-wedding">
+                        Cere oferta pentru dansul mirilor
                     </button>
                 </div>
             </section>
@@ -45,7 +47,10 @@ function WeddingDancePage({ openInscriere }) {
                             <span className="level-number">{index + 1}</span>
                             <h3>{pkg.name}</h3>
                             <p>{pkg.description}</p>
-                            <button className="cta-level-wedding" onClick={openInscriere}>
+                            <button
+                                className="cta-level-wedding"
+                                onClick={() => openInscriere(`Bună ziua! Aș dori oferta pentru dansul mirilor, ${pkg.name}.`)}
+                            >
                                 Vreau detalii
                             </button>
                         </div>
@@ -61,7 +66,7 @@ function WeddingDancePage({ openInscriere }) {
                         Beneficiați de sala noastră exclusiv pentru voi și instructor dedicat. 
                         Program flexibil în funcție de timpul vostru liber (dimineața, seara sau în weekend).
                     </p>
-                    <button className="cta-mixt-wedding" onClick={openInscriere}>Contactează-ne pe WhatsApp</button>
+                    <button className="cta-mixt-wedding" onClick={() => openInscriere(WEDDING_MESSAGE)}>Cere oferta pentru dansul mirilor</button>
                 </div>
             </section>
         </div>

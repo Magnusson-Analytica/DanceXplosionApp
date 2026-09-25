@@ -1,0 +1,48 @@
+.sticky-cta {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .sticky-cta {
+        display: block;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 900; /* Below the navbar (1000) and mobile menu (1001) */
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.12);
+        transform: translateY(110%);
+        transition: transform 0.3s ease;
+    }
+
+    .sticky-cta.visible {
+        transform: translateY(0);
+    }
+
+    .sticky-cta-button {
+        width: 100%;
+        min-height: 48px;
+        border: none;
+        border-radius: 50px;
+        background: var(--c-secondary);
+        color: var(--c-white);
+        font-family: 'Georgia', serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 0 12px;
+        cursor: pointer;
+    }
+
+    /* Keep the footer's last line clear of the bar */
+    .site-footer {
+        padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sticky-cta {
+        transition: none;
+    }
+}

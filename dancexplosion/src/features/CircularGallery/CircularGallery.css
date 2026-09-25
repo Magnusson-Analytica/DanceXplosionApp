@@ -188,3 +188,9 @@
         padding: 20px; /* Padding mai mic */
     }
 }
+/* Stop the auto-scrolling carousel for visitors who ask for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .infinite-carousel-track {
+        animation: none !important;
+    }
+}

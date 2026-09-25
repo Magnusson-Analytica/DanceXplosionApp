@@ -24,7 +24,7 @@ function AlexLazar({ openInscriere }) {
             { label: "Experiență Predare", value: "16 Ani" },
             { label: "Specializare", value: "Salsa, Bachata, Dans Sportiv" },
         ],
-        classes: ["Bachata Improver", "Incepatori mixt", "Copii 10-14 Ani"],
+        classes: ["Bachata Improver", "Incepatori mixt", "Copii 10-15 Ani"],
         photo: malePhoto,
     };
 
@@ -93,7 +93,7 @@ function AlexLazar({ openInscriere }) {
                     <button className="cta-contact-instructor" onClick={openInscriere}>
                         Înscrie-te la Cursurile lui Alex
                     </button>
-                    <a href="#" className="back-link">← Înapoi la Pagină Principală</a>
+                    <a href="/" className="back-link">← Înapoi la Pagină Principală</a>
                 </div>
             </div>
         </div>

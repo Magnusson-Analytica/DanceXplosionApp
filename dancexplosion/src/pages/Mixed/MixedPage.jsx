@@ -1,5 +1,13 @@
 import React from 'react';
 import './MixedPage.css';
+import { newGroups, waitlistMessage } from '../../features/newGroups/newGroupsData';
+
+// The mixed course is for beginners, so every CTA joins the October Salsa & Bachata group
+const NEW_GROUP = newGroups[0];
+const joinNewGroup = (openInscriere) => openInscriere(waitlistMessage(NEW_GROUP), {
+    title: `Lista de așteptare: ${NEW_GROUP.name}`,
+    subtitle: `Grupa nouă începe în ${NEW_GROUP.start}. Scrie-ne și te anunțăm înainte de start.`,
+});
 
 const benefits = [
     { 
@@ -32,8 +40,9 @@ function MixedPage({ openInscriere }) {
                         Nu știi ce să alegi? Începe cu amândouă! 
                         Cursul ideal pentru începători care vor să prindă rapid gustul distracției latino.
                     </p>
-                    <button onClick={openInscriere} className="cta-page-main-mixed">
-                        Înscrie-te la o probă
+                    <p className="mixed-pitch"><strong>Grupa nouă începe în {NEW_GROUP.start}.</strong></p>
+                    <button onClick={() => joinNewGroup(openInscriere)} className="cta-page-main-mixed">
+                        Intră pe lista de așteptare
                     </button>
                 </div>
             </section>
@@ -59,8 +68,8 @@ function MixedPage({ openInscriere }) {
                     <p className="promo-description-mixed">
                         Alătură-te comunității Dance Xplosion și descoperă o nouă pasiune alături de oameni faini.
                     </p>
-                    <button className="cta-final-mixed" onClick={openInscriere}>
-                        Contactează-ne pe WhatsApp
+                    <button className="cta-final-mixed" onClick={() => joinNewGroup(openInscriere)}>
+                        Înscrie-te în grupa din octombrie
                     </button>
                 </div>
             </section>

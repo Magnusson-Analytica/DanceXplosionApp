@@ -89,7 +89,7 @@ function AlexMagnusson({ openInscriere }) {
                     </div>
                     
                     <button className="cta-contact-instructor" onClick={openInscriere}>Înscrie-te la Cursuri</button>
-                    <a href="#" className="back-link">← Înapoi la Pagină Principală</a>
+                    <a href="/" className="back-link">← Înapoi la Pagină Principală</a>
                 </div>
             </div>
         </div>

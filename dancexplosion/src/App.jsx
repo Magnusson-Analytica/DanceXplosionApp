@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css'; 
 import Navbar from './components/layout/Navbar'; 
 import HomePage from './pages/Home/HomePage.jsx'; 
@@ -17,18 +17,56 @@ import AlexMagnusson from "./pages/Instructor/Alex_Magnusson/alexmag.jsx";
 import AlexandraIvan from "./pages/Instructor/Alexandra_Ivan/alexandraivan.jsx";
 import AdrianRasinariu from "./pages/Instructor/Adrian_Rasinariu/adrianrasinariu.jsx";
 
+import NotFoundPage from './pages/NotFound/NotFoundPage.jsx';
+import { useLocation, handleLinkClick, applyHead } from './router';
+import ContactDialog from './components/ui/ContactDialog/ContactDialog.jsx';
+import { DEFAULT_MESSAGE, whatsappUrl, isMobileDevice } from './contact';
+
 import CookieConsent from './components/ui/CookieConsent/CookieConsent.jsx'; 
+import StickyCta from './components/ui/StickyCta/StickyCta.jsx';
 import WorkInProgress from './components/ui/WorkInProgress/WorkInProgress.jsx';
 import './features/CircularGallery/CircularGallery.css'; 
 import DXPLogo from './assets/icons/DXPlogo.png'; 
 
+// Real URLs for every page; the build step writes a matching HTML file for each (see src/seo/pages.js)
+const routes = {
+  '/': HomePage,
+  '/salsa': SalsaPage,
+  '/bachata': BachataPage,
+  '/kizomba': KizombaPage,
+  '/curs-mixt': MixedPage,
+  '/cursuri-private': PrivateClassPage,
+  '/copii': KidsPage,
+  '/dansul-mirilor': WeddingDancePage,
+  '/instructori/nicoleta-cristina': NicoletaCristiana,
+  '/instructori/alex-lazar': AlexLazar,
+  '/instructori/alex-magnusson': AlexMagnusson,
+  '/instructori/alexandra-ivan': AlexandraIvan,
+  '/instructori/adrian-rasinariu': AdrianRasinariu,
+};
+
 function App() {
-  const [route, setRoute] = useState(window.location.hash);
+  const { path, hash } = useLocation();
   const [showWIP, setShowWIP] = useState(false);
+  const [contactRequest, setContactRequest] = useState(null);
+  const previousPath = useRef(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [route]);
+    applyHead(routes[path] ? path : '/404');
+
+    // Anchors like /#preturi scroll to their section once it has rendered;
+    // moving to a different page starts at the top
+    const pathChanged = previousPath.current !== path;
+    previousPath.current = path;
+    requestAnimationFrame(() => {
+      const target = hash.length > 1 ? document.getElementById(hash.slice(1)) : null;
+      if (target) {
+        target.scrollIntoView({ behavior: pathChanged ? 'auto' : 'smooth' });
+      } else if (pathChanged) {
+        window.scrollTo(0, 0);
+      }
+    });
+  }, [path, hash]);
 
   useEffect(() => {
     const setSmartFavicon = (src) => {
@@ -59,84 +97,35 @@ function App() {
     };
 
     setSmartFavicon(DXPLogo);
-
-    const handleHashChange = () => setRoute(window.location.hash);
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const currentHash = route.substring(1); 
-
-  const openInscriere = () => {
-    const numarTelefon = "40751327415"; 
-    const mesaj = encodeURIComponent("Bună ziua! Doresc să rezerv o clasă de probă la Dance Xplosion Academy.");
-    const urlWhatsapp = `https://wa.me/${numarTelefon}?text=${mesaj}`;
-    window.open(urlWhatsapp, '_blank');
+  // Every WhatsApp CTA goes through here. The message pre-fills the chat with what the visitor
+  // clicked; on desktop a dialog also offers a phone call and optional extra route (dialog.extra).
+  const openInscriere = (customMessage, dialog = {}) => {
+    const message = typeof customMessage === 'string' ? customMessage : DEFAULT_MESSAGE;
+    if (isMobileDevice()) {
+      window.open(whatsappUrl(message), '_blank');
+    } else {
+      setContactRequest({ message, ...dialog });
+    }
   };
 
-  const openWIP = () => setShowWIP(true);
   const closeWIP = () => setShowWIP(false);
   
-  let PageComponent;
-  let isHome = false;
-
-  if (currentHash === 'salsa') {
-    PageComponent = SalsaPage;
-  } else if (currentHash === 'bachata') {
-    PageComponent = BachataPage;
-  } else if (currentHash === 'kizomba') {
-    PageComponent = KizombaPage;
-  } else if (currentHash === 'dansul-mirilor') {
-    PageComponent = WeddingDancePage;
-  } else if (currentHash === 'copii') {
-    PageComponent = KidsPage;
-  } else if (currentHash === 'mixed') {
-    PageComponent = MixedPage;
-  } else if (currentHash === 'cursuri-private') {
-    PageComponent = PrivateClassPage;
-  } else if (currentHash.startsWith('instructor/')) {
-    const slug = currentHash.split('/')[1];
-    
-    switch(slug) {
-        case 'nicoleta-cristina':
-            PageComponent = NicoletaCristiana;
-            break;
-        case 'alex-lazar':
-            PageComponent = AlexLazar;
-            break;
-        case 'alex-magnusson':
-            PageComponent = AlexMagnusson;
-            break;
-        case 'alexandra-ivan':
-            PageComponent = AlexandraIvan;
-            break;
-        case 'adrian-rasinariu':
-            PageComponent = AdrianRasinariu;
-            break;
-        default:
-            PageComponent = AlexLazar; 
-    }
-  } else {
-    PageComponent = HomePage;
-    isHome = true;
-  }
+  const PageComponent = routes[path] || NotFoundPage;
+  const isHome = path === '/';
 
   return (
-    <div className="App">
-      <Navbar openLogin={openWIP} isHome={isHome} />
+    <div className="App" onClick={handleLinkClick}>
+      <Navbar isHome={isHome} />
 
       <WorkInProgress isVisible={showWIP} onClose={closeWIP} onContact={openInscriere} />
+      <ContactDialog request={contactRequest} onClose={() => setContactRequest(null)} />
 
-      {isHome ? (
-        <HomePage 
-          openInscriere={openInscriere}
-          openWIP={openWIP}       
-        />
-      ) : (
-        <PageComponent openInscriere={openInscriere} />
-      )}
+      <PageComponent openInscriere={openInscriere} />
 
       <Footer />
+      <StickyCta isKidsPage={path === '/copii'} />
       <CookieConsent />
     </div>
   );

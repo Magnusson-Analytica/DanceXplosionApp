@@ -69,6 +69,9 @@
     text-decoration: none;
     transition: color 0.3s ease;
     line-height: 1.5;
+    /* Larger tap area on phones without changing the look */
+    display: inline-block;
+    padding: 10px 0;
 }
 
 .footer-link:hover {
@@ -93,6 +96,8 @@
 .social-links a {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
+    display: inline-block;
+    padding: 12px 0;
     transition: padding-left 0.3s ease, color 0.3s ease;
 }
 

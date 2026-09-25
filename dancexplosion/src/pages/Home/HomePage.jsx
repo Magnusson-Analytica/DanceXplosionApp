@@ -4,21 +4,50 @@ import './HomePage.css';
 import InfiniteMovingTeamCarousel from '../../features/CircularGallery/CircularGallery'; 
 import ClassDetails from '../../features/classes/ClassDetails/ClassDetails'; 
 import ScheduleTable from '../../features/schedule/ScheduleTable/ScheduleTable'; 
+import PricingFaq from '../../features/faq/PricingFaq';
+import NewGroups from '../../features/newGroups/NewGroups';
+import DanceLand from '../../features/danceland/DanceLand';
 import DXPLogo from '../../assets/icons/DXPlogo.png';
 
-function HomePage({ openInscriere, openWIP }) {
+// The logo intro only plays on a visitor's first home page view; after that the video is
+// cached (and in-app navigation back home shouldn't replay it)
+const INTRO_KEY = 'dx-intro-seen';
+let introShownThisSession = false;
+const hasSeenIntro = () => {
+  if (introShownThisSession) return true;
+  try {
+    return localStorage.getItem(INTRO_KEY) === '1';
+  } catch {
+    return false;
+  }
+};
+const markIntroSeen = () => {
+  introShownThisSession = true;
+  try {
+    localStorage.setItem(INTRO_KEY, '1');
+  } catch {
+    // Storage blocked (private mode): the in-memory flag still covers this visit
+  }
+};
+
+function HomePage({ openInscriere }) {
   const heroSectionRef = useRef(null);
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
   const [userUnmuted, setUserUnmuted] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => !hasSeenIntro());
   const [isExiting, setIsExiting] = useState(false);
+  // Decided once on first render so re-running effects can't change it
+  const introPending = useRef(isLoading);
 
   const hlsSource = "/video/playlist.m3u8"; 
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    const showIntro = introPending.current;
+    markIntroSeen();
 
     const handleTransition = () => {
       setIsExiting(true);
@@ -29,7 +58,9 @@ function HomePage({ openInscriere, openWIP }) {
     };
 
     // Check if video is already ready (instant load)
-    if (video.readyState >= 3) {
+    if (!showIntro) {
+      // Returning visitor: no overlay to remove
+    } else if (video.readyState >= 3) {
       handleTransition();
     } else {
       // Enforce a minimum display time for the initial pulse, then transition
@@ -49,12 +80,16 @@ function HomePage({ openInscriere, openWIP }) {
       });
     }
 
+    // Respect the visitor's reduced-motion setting: keep the first frame, don't loop the video
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) video.autoplay = false;
+
     if (Hls.isSupported()) {
       const hls = new Hls();
       hls.loadSource(hlsSource);
       hls.attachMedia(video);
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.play().catch(() => {});
+        if (!prefersReducedMotion) video.play().catch(() => {});
       });
       return () => hls.destroy();
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -101,30 +136,35 @@ function HomePage({ openInscriere, openWIP }) {
           </h1>
           <p className="hero-pitch">ACADEMIA TA DE DANS DIN SIBIU.</p>
           <div className="hero-cta-group">
-            <button className="cta-primary-dark" onClick={openInscriere}>REZERVĂ UN CURS DE PROBĂ</button>
-            <a href="#orarul-tau" className="cta-secondary-accent button-as-link">ORARUL NOSTRU</a>
+            <a href="/#grupe-noi" className="cta-primary-dark button-as-link">ÎNCEPE ÎN OCTOMBRIE</a>
+            <a href="/#orarul-tau" className="cta-secondary-accent button-as-link">VEZI ORARUL</a>
           </div>
         </div>
       </section>
 
       <section className="circular-gallery-wrapper">
-        <h2 className="section-heading-dark">Faceți cunoștință cu echipa Dance Explosion</h2>
+        <h2 className="section-heading-dark">Faceți cunoștință cu echipa Dance Xplosion</h2>
         <div className="circular-gallery-container">
           <InfiniteMovingTeamCarousel />
         </div>
       </section>
 
       <ClassDetails /> 
+
+      <NewGroups openInscriere={openInscriere} />
+
+      <DanceLand openInscriere={openInscriere} />
       
       <section id="orarul-tau"> 
         <ScheduleTable openInscriere={openInscriere} />
       </section>
 
+      <PricingFaq />
+
       <section className="lxf-promo-section" id="lxf">
         <div className="lxf-content-dark">
           <h2 className="lxf-title">LXF 2027</h2>
           <p className="lxf-description">Cel mai mare festival de dans din Transilvania. Pregătește-te pentru spectacol!</p>
-          <button className="cta-lxf-gold" onClick={openWIP}>AFLĂ MAI MULTE</button>
         </div>
       </section>
     </div>

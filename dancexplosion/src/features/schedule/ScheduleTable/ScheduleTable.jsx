@@ -1,34 +1,32 @@
 import React from 'react';
 import './ScheduleTable.css';
+import { isDanceLandUpcoming, DANCELAND_FORM_URL } from '../../danceland/danceLandData';
+import { groupForStyle, waitlistMessage } from '../../newGroups/newGroupsData';
 
-const WHATSAPP_LINK = "https://wa.me/40751327415"; // Înlocuiește cu numărul tău real
 
 const scheduleData = [
     {
         hall: "Sala Mare - 1",
         days: {
             "Luni": [
-                { time: "18:00", name: "Kizomba Beginner", instr: "Cris", level: "Începători" },
                 { time: "19:00", name: "Kizomba Avansați", instr: "Cris", level: "Avansați" },
-                { time: "20:00", name: "Kizomba Improver", instr: "Cris", level: "Intermediari" }
+                { time: "20:00", name: "Kizomba Beginners", instr: "Cris", level: "Începători" }
             ],
             "Marți": [
-                { time: "18:00", name: "Copii 7-9 Ani (Grupa A)", instr: "Adi", level: "Copii" },
-                { time: "19:00", name: "Salsa Intermediari - Avansați", instr: "Alex M - Cris", level: "Intermediari/Avansați" },
-                { time: "20:00", name: "Bachata Improver", instr: "Alex L", level: "Intermediari" },
-                { time: "21:00", name: "Trupa DXS", instr: "", level: "Performanță" }
+                { time: "18:00", name: "Copii 7-9 Ani (Performance)", instr: "Adi", level: "Copii" },
+                { time: "19:00", name: "Salsa/Bachata Începători 2", instr: "Alex", level: "Începători" },
+                { time: "19:00", name: "Începători Mixt", instr: "Alex L", level: "Începători" },
+                { time: "20:00", name: "Bachata Improver", instr: "Alex L", level: "Intermediari" }
             ],
             "Miercuri": [
-                { time: "18:00", name: "Kizomba Beginner", instr: "Cris", level: "Începători" },
                 { time: "19:00", name: "Kizomba Avansați", instr: "Cris", level: "Avansați" },
-                { time: "20:00", name: "Kizomba Improver", instr: "Cris", level: "Intermediari" },
-                { time: "21:00", name: "Trupa DXS", instr: "", level: "Performanță" }
+                { time: "20:00", name: "Kizomba Beginners", instr: "Cris", level: "Începători" }
             ],
             "Joi": [
-                { time: "18:00", name: "Copii 7-9 Ani (Grupa A)", instr: "Adi", level: "Copii" },
-                { time: "19:00", name: "Salsa Intermediari - Avansați", instr: "Alex M + Cris", level: "Intermediari/Avansați" },
-                { time: "20:00", name: "Bachata Improver", instr: "Alex L", level: "Intermediari" },
-                { time: "22:00", name: "Practice Party", instr: "", level: "Acces Liber" }
+                { time: "18:00", name: "Copii 7-9 Ani (Performance)", instr: "Adi", level: "Copii" },
+                { time: "19:00", name: "Salsa/Bachata Începători 2", instr: "Alex", level: "Începători" },
+                { time: "19:00", name: "Începători Mixt", instr: "Alex L", level: "Începători" },
+                { time: "20:00", name: "Bachata Improver", instr: "Alex L", level: "Intermediari" }
             ],
             "Vineri": []
         }
@@ -38,12 +36,13 @@ const scheduleData = [
         days: {
             "Luni": [],
             "Marți": [
-                { time: "20:00", name: "Începători Mixt - Grupa 1", instr: "Alex M + Cris", level: "Începători" }
+                { time: "19:00", name: "Bachata/Salsa Începători 1", instr: "Adi", level: "Începători" },
+                { time: "20:00", name: "Improver Mixt", instr: "Alex M + Cris", level: "Intermediari" }
             ],
             "Miercuri": [],
             "Joi": [
-                { time: "20:00", name: "Începători Mixt - Grupa 1", instr: "Alex M + Cris", level: "Începători" },
-                { time: "22:00", name: "Practice Party", instr: "", level: "Acces Liber" }
+                { time: "19:00", name: "Bachata/Salsa Începători 1", instr: "Adi", level: "Începători" },
+                { time: "20:00", name: "Improver Mixt", instr: "Alex M + Cris", level: "Intermediari" }
             ],
             "Vineri": []
         }
@@ -53,39 +52,63 @@ const scheduleData = [
         days: {
             "Luni": [
                 { time: "17:00", name: "Copii 4-6 Ani", instr: "Cris", level: "Copii" },
-                { time: "19:00", name: "Copii 10-14 Ani", instr: "Alex", level: "Copii" },
-                { time: "20:00", name: "Curs Studenți", instr: "Adi + Allisor", level: "Acces Liber" }
+                { time: "18:00", name: "Kizomba Improvers", instr: "Cris", level: "Intermediari" },
+                { time: "19:00", name: "Copii 10-15 Ani", instr: "Alex", level: "Copii" },
+                { time: "20:00", name: "Curs Studenți", instr: "Adi + Allisor", level: "Acces Liber" },
+                { time: "21:00", name: "Musicality - Nama", instr: "Allisor", level: "Toate Nivelurile" }
             ],
             "Marți": [
                 { time: "17:00", name: "Copii 7-9 Ani", instr: "Adi", level: "Copii" },
-                { time: "18:00", name: "Copii 4-6 Ani", instr: "Allisor", level: "Copii" },
-                { time: "19:00", name: "Începători Mixt", instr: "Alex L + Allisor", level: "Start 20 Ianuarie" },
+                { time: "18:00", name: "Copii 4-6 Ani", instr: "Alex", level: "Copii" },
+                { time: "19:00", name: "Salsa Inter-Avansați", instr: "Alex M + Cris", level: "Intermediari/Avansați" },
                 { time: "20:00", name: "Bachata Intermediari", instr: "Adi + Allisor", level: "Intermediari" },
                 { time: "21:00", name: "Trupa DXS", instr: "", level: "Performanță" }
             ],
             "Miercuri": [
                 { time: "17:00", name: "Copii 4-6 Ani", instr: "Cris", level: "Copii" },
-                { time: "19:00", name: "Copii 10-14 Ani", instr: "Alex L", level: "Copii" },
+                { time: "18:00", name: "Kizomba Improvers", instr: "Cris", level: "Intermediari" },
+                { time: "19:00", name: "Copii 10-15 Ani", instr: "Alex", level: "Copii" },
                 { time: "20:00", name: "Curs Studenți", instr: "Adi + Allisor", level: "Acces Liber" },
                 { time: "21:00", name: "Trupa DXS", instr: "", level: "Performanță" }
             ],
             "Joi": [
                 { time: "17:00", name: "Copii 7-9 Ani", instr: "Adi", level: "Copii" },
-                { time: "18:00", name: "Copii 4-6 Ani", instr: "Allisor", level: "Copii" },
-                { time: "19:00", name: "Începători Mixt", instr: "Alex L + Allisor", level: "Start 20 Ianuarie" },
-                { time: "20:00", name: "Bachata Intermediari", instr: "Adi + Allisor", level: "Intermediari" },
-                { time: "22:00", name: "Practice Party", instr: "", level: "Acces Liber" }
+                { time: "18:00", name: "Copii 4-6 Ani", instr: "Alex", level: "Copii" },
+                { time: "19:00", name: "Salsa Inter-Avansați", instr: "Alex M + Cris", level: "Intermediari/Avansați" },
+                { time: "20:00", name: "Bachata Intermediari", instr: "Adi + Allisor", level: "Intermediari" }
             ],
             "Vineri": []
         }
     }
 ];
 
-function ScheduleTable() {
-    const goToWhatsApp = () => {
-        window.open(WHATSAPP_LINK, '_blank');
-    };
+const BEGINNER_LEVEL = "Începători";
+const KIDS_LEVEL = "Copii";
 
+// Every slot starts a conversation (WhatsApp on phones, a choice dialog on desktop):
+// beginner groups are already running, so beginners join the waiting list for the October group;
+// kids sign up through DanceLand while it's upcoming; everyone else asks about that class
+const getSlotRequest = (item, day, hall) => {
+    if (item.level === BEGINNER_LEVEL) {
+        const group = groupForStyle(item.name);
+        return [waitlistMessage(group), {
+            title: `Grupa ${item.name} a început deja`,
+            subtitle: `Intră pe lista de așteptare pentru grupa nouă de ${group.name}, care începe în ${group.start}.`,
+        }];
+    }
+    if (item.level === KIDS_LEVEL && isDanceLandUpcoming()) {
+        return [`Bună ziua! Doresc să înscriu copilul la DanceLand Open Weekend (17-18 octombrie), pentru grupa ${item.name}.`, {
+            title: "Înscrieri la DanceLand",
+            subtitle: "Înscrierile la cursurile pentru copii se fac la DanceLand Open Weekend, pe 17-18 octombrie.",
+            extra: { label: "Completează formularul de înscriere", url: DANCELAND_FORM_URL },
+        }];
+    }
+    return [`Bună ziua! Aș dori detalii despre ${item.name}, ${day.toLowerCase()} ${item.time} (${hall}).`, {
+        title: `${item.name}, ${day.toLowerCase()} ${item.time}`,
+    }];
+};
+
+function ScheduleTable({ openInscriere }) {
     return (
         <section className="schedule-section">
             <h2 className="section-heading-dark">Program Cursuri</h2>
@@ -99,19 +122,29 @@ function ScheduleTable() {
                                 <h4 className="day-title">{day}</h4>
                                 <div className="class-list">
                                     {classes.length > 0 ? (
-                                        classes.map((item, index) => (
-                                            <div 
-                                                key={index} 
-                                                onClick={goToWhatsApp}
-                                                className="class-card"
-                                                style={{ cursor: 'pointer' }}
-                                            >
-                                                <span className="class-time">{item.time}</span>
-                                                <p className="class-name">{item.name}</p>
-                                                <span className="class-instr">{item.instr}</span>
-                                                <span className="class-level-tag">{item.level}</span>
-                                            </div>
-                                        ))
+                                        classes.map((item, index) => {
+                                            const run = () => openInscriere(...getSlotRequest(item, day, hallGroup.hall));
+                                            return (
+                                                <div 
+                                                    key={index} 
+                                                    onClick={run}
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === 'Enter' || e.key === ' ') {
+                                                            e.preventDefault();
+                                                            run();
+                                                        }
+                                                    }}
+                                                    role="button"
+                                                    tabIndex={0}
+                                                    aria-label={`${item.name}, ${day} ${item.time}`}
+                                                    className="class-card"
+                                                    style={{ cursor: 'pointer' }}
+                                                >
+                                                    <span className="class-time">{item.time}</span>
+                                                    <p className="class-name">{item.name}</p>
+                                                </div>
+                                            );
+                                        })
                                     ) : (
                                         <div className="empty-day">Fără cursuri</div>
                                     )}

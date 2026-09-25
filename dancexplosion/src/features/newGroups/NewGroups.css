@@ -1,0 +1,95 @@
+.new-groups-section {
+    padding: 90px 5%;
+    text-align: center;
+    background-color: var(--c-white);
+    font-family: 'Georgia', serif;
+}
+
+.new-groups-intro {
+    max-width: 700px;
+    margin: -20px auto 14px;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--c-text-primary);
+}
+
+.new-groups-reassurance {
+    margin: 0 auto 40px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--c-secondary);
+}
+
+.new-groups-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    align-items: stretch; /* both cards take the height of the taller one */
+}
+
+.new-groups-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 28px;
+    background: var(--c-background);
+    border-radius: 18px;
+    border-top: 4px solid var(--c-secondary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.new-groups-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.12rem;
+    text-transform: uppercase;
+    color: var(--c-text-primary);
+    margin-bottom: 10px;
+}
+
+.new-groups-name {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+/* "Începători" always sits on its own line so both cards have the same shape */
+.new-groups-level {
+    display: block;
+}
+
+.new-groups-start {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--c-secondary);
+    margin-bottom: 26px;
+}
+
+.new-groups-cta {
+    margin-top: auto; /* keeps both cards' buttons on the same line */
+    padding: 16px 38px;
+    border: none;
+    border-radius: 50px;
+    background: var(--c-secondary);
+    color: var(--c-white);
+    font-family: 'Georgia', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.new-groups-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 112, 51, 0.4);
+}
+
+@media (max-width: 600px) {
+    .new-groups-section {
+        padding: 70px 5%;
+    }
+
+    .new-groups-cta {
+        width: 100%;
+    }
+}

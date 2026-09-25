@@ -1,5 +1,7 @@
 import React from 'react';
 import './BachataPage.css';
+import { newGroups, waitlistMessage } from '../../features/newGroups/newGroupsData';
+
 
 
 const levels = [
@@ -7,6 +9,17 @@ const levels = [
     { name: "Improver", description: "Stăpânirea figurilor simple, valuri corporale (body waves) și styling de bază.", target: "#improver" },
     { name: "Intermediar", description: "Tehnică modernă și sensual, muzicalitate, variații de ritm și izolari avansate.", target: "#intermediate" },
 ];
+
+
+// Beginners join the waiting list for the October group; other levels ask about their level
+const NEW_GROUP = newGroups[0];
+const joinNewGroup = (openInscriere) => openInscriere(waitlistMessage(NEW_GROUP), {
+    title: `Lista de așteptare: ${NEW_GROUP.name}`,
+    subtitle: `Grupa nouă începe în ${NEW_GROUP.start}. Scrie-ne și te anunțăm înainte de start.`,
+});
+const askAboutLevel = (openInscriere, level) => level.name === "Beginner"
+    ? joinNewGroup(openInscriere)
+    : openInscriere(`Bună ziua! Aș dori detalii despre grupa de Bachata ${level.name}.`);
 
 function BachataPage({ openInscriere }) {
     return (
@@ -20,8 +33,8 @@ function BachataPage({ openInscriere }) {
                     <p className="bachata-pitch">
                         Stilul de dans social care pune accentul pe conexiunea cu partenerul, fluiditate și senzualitate.
                     </p>
-                    <button onClick={openInscriere} className="cta-page-main-bachata" style={{ border: 'none', cursor: 'pointer' }}>
-                        Rezervă prin WhatsApp
+                    <button onClick={() => joinNewGroup(openInscriere)} className="cta-page-main-bachata" style={{ border: 'none', cursor: 'pointer' }}>
+                        Înscrie-te în grupa din octombrie
                     </button>
                 </div>
             </section>
@@ -35,8 +48,8 @@ function BachataPage({ openInscriere }) {
                             <span className="level-number">{index + 1}</span>
                             <h3>{level.name}</h3>
                             <p>{level.description}</p>
-                            <button className="cta-level-bachata" onClick={openInscriere}>
-                                Înscrie-te la {level.name}
+                            <button className="cta-level-bachata" onClick={() => askAboutLevel(openInscriere, level)}>
+                                {level.name === "Beginner" ? "Grupa nouă din octombrie" : `Detalii ${level.name}`}
                             </button>
                         </div>
                     ))}
@@ -50,7 +63,7 @@ function BachataPage({ openInscriere }) {
                     <p className="mixt-description-bachata">
                         Combină bazele Salsa și Bachata într-un singur program accelerat. Excelent pentru un start rapid!
                     </p>
-                    <button className="cta-mixt-bachata" onClick={openInscriere}>Rezervă loc la Mixt</button>
+                    <button className="cta-mixt-bachata" onClick={() => openInscriere(waitlistMessage(newGroups[0]))}>Salsa & Bachata din octombrie</button>
                 </div>
             </section>
         </div>
